@@ -88,3 +88,9 @@ function updateTimerUI({ days, hours, minutes, seconds }) {
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
+
+// Użytkownik wybiera datę za pomocą flatpickr.
+// Jeśli data jest w przeszłości, wyświetli się powiadomienie o błędzie za pomocą iziToast, a przycisk „Start” pozostanie nieaktywny.
+// Po wybraniu daty w przyszłości, użytkownik może uruchomić licznik.
+// Licznik aktualizuje dni, godziny, minuty i sekundy co sekundę.
+// Gdy czas się skończy, timer zatrzymuje się i wyświetla powiadomienie o sukcesie.

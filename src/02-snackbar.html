@@ -24,5 +24,30 @@
     </main>
 
     <load src="./partials/footer.html" />
+
+    <form class="form">
+      <label>
+        Delay (ms)
+        <input type="number" name="delay" required />
+      </label>
+    
+      <fieldset>
+        <legend>State</legend>
+        <label>
+          <input type="radio" name="state" value="fulfilled" required />
+          Fulfilled
+        </label>
+        <label>
+          <input type="radio" name="state" value="rejected" required />
+          Rejected
+        </label>
+      </fieldset>
+    
+      <button type="submit">Create notification</button>
+
+      <script type="module" src="./js/02-snackbar.js"></script>
+
+    </form>
+
   </body>
 </html>
