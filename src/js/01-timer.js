@@ -10,6 +10,7 @@ const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
 let userSelectedDate = null; // Zmienna przechowująca wybraną datę
 let timerInterval = null; // Zmienna do przechowywania identyfikatora interwału
+let isTimerRunning = false; // Flaga do sprawdzania, czy timer już działa
 
 // Konfiguracja flatpickr
 const options = {
@@ -27,7 +28,7 @@ const options = {
       });
       startBtn.disabled = true;
     } else {
-      startBtn.disabled = false; // Aktywujemy przycisk "Start"
+      startBtn.disabled = isTimerRunning; // Aktywujemy przycisk "Start" tylko, jeśli timer nie działa
     }
   },
 };
@@ -37,10 +38,13 @@ flatpickr("#datetime-picker", options);
 
 // Obsługa kliknięcia przycisku "Start"
 startBtn.addEventListener("click", () => {
+  if (isTimerRunning) return; // Jeśli timer już działa, nie rób nic
+
   if (timerInterval) {
     clearInterval(timerInterval); // Jeśli timer już działa, zatrzymaj go
   }
 
+  isTimerRunning = true; // Ustaw flagę, że timer jest uruchomiony
   startBtn.disabled = true; // Dezaktywujemy przycisk po starcie
   timerInterval = setInterval(() => {
     const currentTime = new Date();
@@ -53,6 +57,7 @@ startBtn.addEventListener("click", () => {
         message: 'Countdown finished!',
       });
       updateTimerUI(0); // Resetujemy licznik
+      isTimerRunning = false; // Resetujemy flagę po zakończeniu
       return;
     }
 
